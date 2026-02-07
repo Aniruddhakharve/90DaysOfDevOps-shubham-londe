@@ -1,145 +1,93 @@
-\# Day 02 – Linux Architecture, Processes \& systemd
+# Day 02 – Linux Architecture, Processes & systemd
 
+## Linux Architecture
 
+Linux is mainly divided into four layers:
 
-\##  Linux Architecture
+### Application Layer
+- Top-most layer of the architecture  
+- This is where the user works  
+- Acts as the interface between the user and the system  
+- Applications run in user space  
+- User space is isolated from the kernel  
 
-Linux is mainly divided into two parts:
+### Shell
+- Interactive way to communicate with the kernel  
+- Acts as a bridge between applications and the kernel  
+- Commands entered by the user are interpreted here  
+- Applications use system calls to request services from the kernel  
 
+### Kernel
+- Core part of the operating system  
+- Manages CPU, memory, and devices  
+- Retrieves data from hardware and provides it to applications  
+- Responsible for process and memory management  
 
-
-\*\*Application\*\*
-
-\- It is top-most layer of the architecture
-
-\- this is layer where user works
-
-\- It serves as the primary interface between user and shell
-
-\- In application layer applications run in a restricted environment called User Space
-
-\- which is isolated from kernel
-
-
-
-\*\*Shell\*\*
-
-\- It is interactive way to talk to kernel 
-
-\- It act as a bridge between the application \& kernel
-
-\- The application uses system calls to ask the kernel for the file data
-
-
-
-\*\*Kernel\*\*
-
-\- Third layer of architecture 
-
-\- It is a computer program 
-
-\- kernel retrives the data from the hardware(hard-drive).
-
-
-
-\*\*Hardware\*\*
-
-\- Fourth layer of architecture 
-\- The physical disk reads the data and sends it back up the stack
-
-
+### Hardware
+- Physical components like CPU, RAM, disk  
+- Kernel communicates directly with hardware  
+- Hardware sends data back up the stack  
 
 ---
 
+## How Processes Are Created and Managed
 
+- Every running program in Linux is a process  
+- When we run a command or start a service, a new process is created  
+- Each process gets a unique PID (Process ID)  
+- When a command finishes, the process ends  
+- All processes are managed by the kernel  
 
-\## How processes are created and managed
-
-\- Every running program in Linux is a process, Every time you run a cmd or start a services a new process is born
-\- Every process gets a unique PID (Process ID)
-\- Once the command finishes, that child process dies, and you get your prompt back
-\- It is all managed by kernel 
-
-
-\## Common Management Commands
-
-\- top or htop: A real-time dashboard showing what's using the most CPU and RAM
-\- ps aux: Lists all active processes on the system in detail
-\- kill <PID>: Sends a signal to stop a specific process (the PID is its unique ID number)
-\- nice / renice: Used to set or change a program's priority
-
-
-
-\### Common Process States
-
-\- Running → currently using CPU
-
-\- Sleeping → waiting for input or resource
-
-\- Stopped → paused
-
-\- Zombie → finished but not cleaned from process table
-
-
+### Common Process States
+- Running → currently using CPU  
+- Sleeping → waiting for input or resource  
+- Stopped → paused  
+- Zombie → finished but still in process table  
 
 ---
 
+## Common Process Management Commands
 
-
-\## What is systemd?
-
-systemd is the service manager it is a master process called systemd (PID 1) manages services in most modern Linux systems, the only process that doesn't have a parent is PID 1 (init/systemd), which is started directly by the Linux Kernel during boot. 
-
-
-\- Systemd  Starts services at boot
-
-\- It also Stops/restarts services
-
-\- IT Manages background services
-
-\- IT also Keeps logs of services
-
-
-
-Example:
-
-nginx, docker, ssh all run as services managed by systemd.
-
-
-
-Why it matters:
-
-If a service crashes in production, we use systemctl to debug and restart.
-
-
+- `top` or `htop` → shows real-time CPU and memory usage  
+- `ps aux` → lists all running processes  
+- `kill <PID>` → stops a specific process  
+- `nice` / `renice` → change process priority  
 
 ---
 
+## What is systemd?
 
+systemd is the service manager used in most modern Linux systems.  
+It is the first process started by the kernel during boot and runs with PID 1.
 
-\## Commands I will use daily
+systemd is responsible for:
+- Starting services at boot  
+- Stopping and restarting services  
+- Managing background services  
+- Keeping logs of services  
 
-ps aux - see running processes  
+Example:  
+Services like nginx, docker, and ssh are managed by systemd.
 
-top - live CPU/memory usage  
-
-htop - better process view  
-
-systemctl status nginx - check service status  
-
-systemctl restart nginx - restart service  
-
-
+Why it matters:  
+If a service crashes in production, we use systemctl commands to check logs and restart services.
 
 ---
 
+## Commands I Will Use Daily
 
+- `ps aux` → see running processes  
+- `top` → live CPU and memory usage  
+- `htop` → better process view  
+- `systemctl status nginx` → check service status  
+- `systemctl restart nginx` → restart service  
 
-\## Why this matters for DevOps
+---
 
-Most servers run Linux   
+## Why This Matters for DevOps
 
-If a service fails or CPU becomes high then our server can crash which will lead to site or applications go down , so understanding processes and systemd helps in troubleshooting this problem quickly.
+Most production servers run on Linux.  
+If CPU usage becomes high or a service crashes, the application or website can go down.  
+Understanding processes and systemd helps in troubleshooting such issues quickly.
 
-Learning this will help me debug servers and manage services in real environments.
-
+This knowledge will help me debug servers and manage services in real environments.
