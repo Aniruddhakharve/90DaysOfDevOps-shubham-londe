@@ -40,7 +40,7 @@ Script:
 
 #!/bin/bash
 
-NAME="Alex"
+NAME="Aniruddha"
 ROLE="DevOps Engineer"
 
 echo "Hello, I am $NAME and I am a $ROLE"
@@ -52,7 +52,7 @@ chmod +x variables.sh
 
 Output:
 
-Hello, I am Alex and I am a DevOps Engineer
+Hello, I am Aniruddha and I am a DevOps Engineer
 
 Single vs Double Quotes:
 
@@ -85,9 +85,9 @@ chmod +x greet.sh
 
 Example output:
 
-Enter your name: Alex  
-Enter your favourite tool: Docker  
-Hello Alex, your favourite tool is Docker
+Enter your name: Aniruddha  
+Enter your favourite tool: Bucket  
+Hello Aniruddha, your favourite tool is bucket
 
 Screenshot:
 
