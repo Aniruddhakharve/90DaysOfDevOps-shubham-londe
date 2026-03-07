@@ -22,7 +22,11 @@ dig google.com
 
 Observation:
 
-Output me google.com ka **A record** aur TTL value show hoti hai.
+Output me google.com ka A record aur TTL value show hoti hai.
+
+Screenshot:
+
+![DNS Lookup](dig-google.png)
 
 ------------------------------------------------------------
 
@@ -56,6 +60,10 @@ Observation:
 
 AWS instance ka IP private range me tha (example: 172.31.x.x).
 
+Screenshot:
+
+![IP Address](ip-addr.png)
+
 ------------------------------------------------------------
 
 ## Task 3 – CIDR & Subnetting
@@ -73,10 +81,10 @@ Subnetting ka use network ko smaller logical networks me divide karne ke liye ho
 CIDR Table:
 
 | CIDR | Subnet Mask | Total IPs | Usable Hosts |
-|-----|-------------|-----------|--------------|
-| /24 | 255.255.255.0 | 256 | 254 |
-| /16 | 255.255.0.0 | 65536 | 65534 |
-| /28 | 255.255.255.240 | 16 | 14 |
+|------|-------------|-----------|--------------|
+| /24  | 255.255.255.0 | 256 | 254 |
+| /16  | 255.255.0.0 | 65536 | 65534 |
+| /28  | 255.255.255.240 | 16 | 14 |
 
 ------------------------------------------------------------
 
@@ -101,6 +109,10 @@ ss -tulpn
 Observation:
 
 System par SSH service port 22 par listening thi.
+
+Screenshot:
+
+![Listening Ports](listening-ports.png)
 
 ------------------------------------------------------------
 
