@@ -26,6 +26,10 @@ Observation:
 
 Shebang line (#!/bin/bash) system ko batati hai ki script ko bash interpreter se run karna hai. Agar shebang remove kar diya jaye to script run ho sakti hai, lekin kabhi kabhi incorrect interpreter use ho sakta hai.
 
+Screenshot:
+
+![Hello Script](hello-script.png)
+
 ------------------------------------------------------------
 
 ## Task 2 – Variables
@@ -52,8 +56,12 @@ Hello, I am Alex and I am a DevOps Engineer
 
 Single vs Double Quotes:
 
-echo '$NAME'  → prints literal text $NAME  
-echo "$NAME"  → prints the value of the variable
+echo '$NAME' → prints literal text $NAME  
+echo "$NAME" → prints the value of the variable
+
+Screenshot:
+
+![Variables Script](variables-script.png)
 
 ------------------------------------------------------------
 
@@ -81,6 +89,10 @@ Enter your name: Alex
 Enter your favourite tool: Docker  
 Hello Alex, your favourite tool is Docker
 
+Screenshot:
+
+![Greet Script](greet-script.png)
+
 ------------------------------------------------------------
 
 ## Task 4 – If-Else Conditions
@@ -101,6 +113,10 @@ else
   echo "Number is zero"
 fi
 
+Screenshot:
+
+![Number Check](number-check.png)
+
 ------------------------------------------------------------
 
 File: file_check.sh
@@ -116,6 +132,10 @@ if [ -f "$FILE" ]; then
 else
   echo "File does not exist."
 fi
+
+Screenshot:
+
+![File Check](file-check.png)
 
 ------------------------------------------------------------
 
@@ -141,6 +161,10 @@ if [ "$CHOICE" = "y" ]; then
 else
     echo "Skipped."
 fi
+
+Screenshot:
+
+![Server Check](server-check.png)
 
 ------------------------------------------------------------
 
