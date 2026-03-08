@@ -1,12 +1,14 @@
-
-Day 18 – Shell Scripting: Functions & Intermediate Concepts
+# Day 18 – Shell Scripting: Functions & Intermediate Concepts
 
 Aaj maine Bash scripting me functions, strict mode aur reusable scripting patterns practice kiye. Is exercise ka goal scripts ko cleaner, safer aur modular banana tha.
 
-Task 1 – Basic Functions
+---
 
-File: functions.sh
+## Task 1 – Basic Functions
 
+**File:** `functions.sh`
+
+```bash
 #!/bin/bash
 
 greet() {
@@ -23,16 +25,24 @@ add() {
 
 greet "Alex"
 add 5 10
+```
 
-Output:
+**Output:**
 
+```
 Hello, Alex!
 Sum: 15
+```
 
-Task 2 – Functions with System Checks
+![Functions Demo](functions-demo.png)
 
-File: disk_check.sh
+---
 
+## Task 2 – Functions with System Checks
+
+**File:** `disk_check.sh`
+
+```bash
 #!/bin/bash
 
 check_disk() {
@@ -48,11 +58,17 @@ check_memory() {
 check_disk
 echo "-----------------------"
 check_memory
+```
 
-Task 3 – Strict Mode (set -euo pipefail)
+![Disk Memory Check](disk-memory-check.png)
 
-File: strict_demo.sh
+---
 
+## Task 3 – Strict Mode (`set -euo pipefail`)
+
+**File:** `strict_demo.sh`
+
+```bash
 #!/bin/bash
 set -euo pipefail
 
@@ -60,23 +76,27 @@ echo "Strict mode demo"
 
 # undefined variable example
 echo "$UNDEFINED_VAR"
+```
 
-Observed behavior:
+**Observed behavior:**
 
 Running the script throws an error because the variable is undefined.
 
-Explanation
+![Strict Mode Error](strict-mode-error.png)
 
-set -e → Script exits immediately if any command fails.
+**Explanation**
 
-set -u → Script exits if an undefined variable is used.
-
+set -e → Script exits immediately if any command fails.  
+set -u → Script exits if an undefined variable is used.  
 set -o pipefail → Pipeline fails if any command inside the pipe fails.
 
-Task 4 – Local Variables
+---
 
-File: local_demo.sh
+## Task 4 – Local Variables
 
+**File:** `local_demo.sh`
+
+```bash
 #!/bin/bash
 
 demo_local() {
@@ -93,11 +113,19 @@ echo "Outside function VAR: ${VAR:-Not set}"
 
 demo_global
 echo "Outside function after global assignment: $VAR"
+```
 
-Task 5 – System Info Reporter Script
+![Local Variable Demo](local-variable-demo.png)
 
-File: system_info.sh
+This demonstrates that variables declared with `local` remain inside the function scope.
 
+---
+
+## Task 5 – System Info Reporter Script
+
+**File:** `system_info.sh`
+
+```bash
 #!/bin/bash
 set -euo pipefail
 
@@ -140,11 +168,14 @@ main() {
 }
 
 main
+```
 
-What I Learned
+![System Info Report](system-info-report.png)
 
-Functions help organize scripts and make code reusable.
+---
 
-Strict mode (set -euo pipefail) prevents silent failures and makes scripts safer.
+## What I Learned
 
-Using local variables avoids conflicts and keeps functions isolated.
+- Functions help organize scripts and make code reusable.
+- Strict mode (`set -euo pipefail`) prevents silent failures and makes scripts safer.
+- Using `local` variables avoids conflicts and keeps functions isolated.
