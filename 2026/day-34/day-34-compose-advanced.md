@@ -172,11 +172,11 @@ These variables are used by Docker Compose instead of hard-coding the values dir
 
 ```yaml
 services:
-
   web:
-    build: ./app
+    build: /root/90DaysOfDevOps-shubham-londe/2026/day-34/app/.
+      #  context: .
     ports:
-      - "8086:5000"
+      - 8060:5000
     environment:
       DB_HOST: db
       DB_USER: ${MYSQL_USER}
@@ -191,11 +191,11 @@ services:
     networks:
       - app-network
     labels:
-      project: "day-34"
-      service: "web"
-
+      project: "day_34"
+      services: "web"
   db:
     image: mysql:8.0
+    restart: always
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
@@ -205,39 +205,36 @@ services:
       - mysql-data:/var/lib/mysql
     healthcheck:
       test:
-        [
-          "CMD",
-          "mysqladmin",
-          "ping",
-          "-h",
-          "localhost",
-          "-u",
-          "root",
-          "-p${MYSQL_ROOT_PASSWORD}"
-        ]
+        - CMD
+        - mysqladmin
+        - ping
+        - -h
+        - localhost
+        - -u
+        - root
+        - -p$${MYSQL_ROOT_PASSWORD}
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 20s
-    restart: always
+      start_period: 30s
+    ports:
+      - 3307:3306
     networks:
       - app-network
-    labels:
+    labels: 
       project: "day-34"
       service: "database"
-
   redis:
     image: redis:alpine
     networks:
       - app-network
     labels:
       project: "day-34"
-      service: "cache"
-
+      service:  "cache"
 networks:
   app-network:
     name: day34-app-network
-
+    driver: bridge
 volumes:
   mysql-data:
     name: day34-mysql-data
