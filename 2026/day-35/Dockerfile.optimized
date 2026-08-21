@@ -1,0 +1,20 @@
+#stage 1: build
+FROM eclipse-temurin:21-jdk AS builder
+
+WORKDIR  /app
+
+COPY Main.java  .
+
+RUN  javac  Main.java  
+#stage 2: runtime 
+FROM eclipse-temurin:21-jre
+
+WORKDIR /app
+
+RUN  useradd --create-home appuser
+
+COPY  --from=builder /app/Main.class   .
+
+USER appuser
+
+CMD  ["java" , "Main" ]
