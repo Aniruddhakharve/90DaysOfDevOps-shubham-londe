@@ -12,15 +12,15 @@ The complete application source code and Docker configuration are maintained in 
 
 ## 🔗 Project Links
 
-### Complete GitHub Project
+## 🔗 Complete Project Repository
 
-**Repository:** `three-tier-java-app-dockerize`
+[**three-tier-java-app-dockerize**](https://github.com/Aniruddhakharve/three-tier-java-app-dockerize)
 
-The complete Java application, Dockerfiles, Docker Compose configuration, source code, and project files are maintained here.
+This repository contains the complete Java application, Dockerfiles, Docker Compose configuration, source code, and deployment files.
 
-### Docker Hub
+## 🐳 Docker Hub
 
-**Repository:** `aniruddhakharve/three-tier-java-app`
+[**aniruddhakharve/three-tier-java-app**](https://hub.docker.com/r/aniruddhakharve/three-tier-java-app)
 
 Published Docker image tags:
 
