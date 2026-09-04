@@ -1,0 +1,28 @@
+name:  Python Matrix
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ${{matrix.os}}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest","windows-latest"]
+        python-version: [ "3.10","3.11","3.12"]
+        exclude:
+          - os: windows-latest
+            python-version: "3.10"
+
+    steps: # Fixed: Aligned to 4 spaces, matching runs-on and strategy
+      - name: checkout code
+        uses: actions/checkout@v7
+
+      - name: setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: show python version
+        run: python --version
