@@ -1,0 +1,21 @@
+name: Self Hosted Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  self-hosted-test:
+    runs-on: [self-hosted , my-linux-runner]
+
+    steps:
+      - name: Show hostname
+        run: hostname
+
+      - name: Show working directory
+        run: pwd
+
+      - name: Create test file
+        run: echo "Created by GitHub Actions self-hosted runner" >> /home/ubuntu/runner-test.txt
+
+      - name: Verify file
+        run: ls -l runner-test.txt

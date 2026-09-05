@@ -1,0 +1,45 @@
+---
+name: GitHub Hosted Runners
+on:
+  workflow_dispatch: null
+jobs:
+  ubuntu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show runner information
+        run: |
+          echo "OS : ubuntu"
+          echo "Hostname: $(hostname)"
+          echo "USER : $USER"
+          echo  "USER: $(whoami)"
+      - name: Check pre-installed tools
+        run: |
+          echo "Docker:"
+          docker --version
+
+          echo "Python:"
+          python --version
+
+          echo "Node:"
+          node --version
+
+          echo "Git:"
+          git --version
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: Show runner information
+        shell: pwsh
+        run: |
+          Write-Host "OS: Windows"
+          Write-Host "Hostname: $env:COMPUTERNAME"
+          Write-Host "User: $env:USERNAME"
+  macos:
+    runs-on: macos-latest
+    steps:
+      - name: Show runner information
+        run: |
+          echo "OS: macOS"
+          echo "Hostname: $(hostname)"
+          echo "User: $(whoami)"
+
