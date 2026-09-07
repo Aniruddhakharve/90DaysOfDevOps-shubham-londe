@@ -1,0 +1,15 @@
+name: Real Script Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+    test-script:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout Git
+              uses: actions/checkout@v7
+
+            - name: run system check script
+              run: |
+                 bash ./system-check.sh
