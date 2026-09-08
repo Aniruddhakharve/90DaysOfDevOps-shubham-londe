@@ -1,0 +1,32 @@
+name: Docker Build and Push
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+    docker-build:
+        runs-on: ubuntu-latest
+        steps:
+            - name: checkout code
+              uses: actions/checkout@v7
+
+            - name: Log in to Docker Hub
+              if: github.ref == 'refs/heads/main'
+              uses: docker/login-action@v3
+              with:
+                username: ${{secrets.DOCKER_USERNAME}}
+                password: ${{secrets.DOCKER_TOKEN}}
+
+            - name: Build Docker image
+              run: | 
+                docker build \
+                -t ${{ secrets.DOCKER_USERNAME }}/day45-docker-cicd:latest  \
+                -t ${{ secrets.DOCKER_USERNAME }}/day45-docker-cicd:${GITHUB_SHA::7} \
+                .
+
+            - name: push Docker image
+              if: github.ref == 'refs/heads/main'
+              run: |
+                docker push ${{ secrets.DOCKER_USERNAME }}/day45-docker-cicd:latest
+                docker push ${{ secrets.DOCKER_USERNAME }}/day45-docker-cicd:${GITHUB_SHA::7}
