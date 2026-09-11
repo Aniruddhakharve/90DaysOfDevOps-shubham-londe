@@ -509,9 +509,7 @@ This prevents unapproved Pull Request code from being published as a Docker imag
 
 The PR pipeline was successfully executed with both jobs passing.
 
-```text
 ![PR Pipeline Success](screenshots/04-pr-pipeline-success.png)
-```
 
 The successful run showed:
 
@@ -683,11 +681,9 @@ Deploy
 
 # 📸 Main Pipeline Screenshot
 
-The final corrected Main Pipeline successfully completed all jobs:
+The final corrected Main Pipeline successfully completed all jobs.
 
-```text
-![Main Pipeline Success](screenshots/05-main-pipeline-final-success.png)
-```
+![Main Pipeline Final Success](screenshots/05-main-pipeline-final-success.png)
 
 The pipeline showed:
 
@@ -910,9 +906,9 @@ The workflow was also manually triggered for testing.
 
 # 📸 Health Check Screenshot
 
-```text
+The scheduled health-check workflow completed successfully.
+
 ![Health Check Success](screenshots/06-health-check-success.png)
-```
 
 The successful run showed:
 
