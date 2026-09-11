@@ -1,0 +1,25 @@
+name: Smart Triggers
+
+on:
+  push:
+    branches:
+        - main
+        - 'release/**'
+    paths:
+        - 'src/**'
+        - 'app/**'
+
+jobs:
+    smart-build:
+        runs-on: ubuntu-latest
+        steps: 
+            - name: Show trigger information
+              run: |
+                echo "Smart trigger workflow ran."
+                echo "BRANCH: ${{github.ref_name}}"
+                echo "Commit: ${{github.sha}}"
+
+            - name: Simulate application build
+              run: |
+                echo "Applications files changed."
+                echo "Running application build..."

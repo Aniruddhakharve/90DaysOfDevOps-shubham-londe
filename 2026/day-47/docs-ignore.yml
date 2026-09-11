@@ -1,0 +1,19 @@
+name: Docs Ignore
+
+on:
+  push:
+    branches:
+        - main
+        - 'release/**'
+    paths-ignore:
+        - '*.md'
+        - 'docs/**'
+
+jobs:
+    code-change:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Show trigger information
+              run: |
+                "Workflow ran because non-documentation files changed."
+                echo "Branch: ${{ github.ref_name }}"
