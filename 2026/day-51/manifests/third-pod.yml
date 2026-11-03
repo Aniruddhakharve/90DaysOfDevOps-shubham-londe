@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: third-pod
+  labels:
+    app: nginx
+    environment: testing
+    team: devops
+
+spec:
+  containers: 
+    - name: nginx
+      image: nginx:latest
+      ports:
+        - containerPort: 80
