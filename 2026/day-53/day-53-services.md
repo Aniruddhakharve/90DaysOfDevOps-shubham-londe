@@ -30,7 +30,7 @@ I also explored Service discovery through Kubernetes DNS, tested internal Pod-to
 
 Created a Deployment named `web-app` with three replicas using the Nginx 1.25 image.
 
-### Manifest: `app-deployment.yaml`
+### Manifest: `manifests/app-deployment.yaml`
 
 ```yaml
 apiVersion: apps/v1
@@ -71,6 +71,8 @@ kubectl get pods -o wide
 
 All three Nginx Pods reached the Running and Ready state.
 
+![Nginx Deployment and Pod IPs](screenshots/01-deployment-and-pod-ips.png)
+
 ### Important Concept: containerPort
 
 `containerPort: 80` documents the port that the container is expected to listen on.
@@ -85,7 +87,7 @@ It exposes an application through an internal IP address, allowing communication
 
 Created a ClusterIP Service named `web-app-clusterip`.
 
-### Manifest: `clusterip-service.yaml`
+### Manifest: `manifests/clusterip-service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -128,6 +130,8 @@ selector:
   app: web-app
 ```
 
+![ClusterIP Service and Endpoints](screenshots/02-clusterip-service-and-endpoints.png)
+
 ### Understanding Service Ports
 
 | Field | Value | Meaning |
@@ -157,6 +161,8 @@ wget -qO- http://web-app-clusterip
 The Nginx welcome page HTML was returned successfully.
 
 This verified internal Pod-to-Service communication.
+
+![ClusterIP Internal Connectivity Test](screenshots/03-clusterip-internal-connectivity.png)
 
 ## 3. Kubernetes Service DNS
 
@@ -217,13 +223,15 @@ The DNS server address `10.96.0.10` was the CoreDNS Service IP observed in the o
 
 The BusyBox `nslookup` output also showed NXDOMAIN responses for some search-domain candidates before resolving the full Service name. The full DNS name resolved successfully.
 
+![Kubernetes Service DNS Resolution](screenshots/04-kubernetes-service-dns.png)
+
 ## 4. NodePort Service
 
 NodePort exposes a Service through a port on the Kubernetes nodes.
 
 Created a NodePort Service named `web-app-nodeport`.
 
-### Manifest: `nodeport-service.yaml`
+### Manifest: `manifests/nodeport-service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -261,6 +269,8 @@ TYPE: NodePort
 CLUSTER-IP: 10.96.190.74
 PORT(S): 80:30080/TCP
 ```
+
+![NodePort Service Configuration](screenshots/05-nodeport-service-created.png)
 
 ### Understanding NodePort Traffic
 
@@ -317,6 +327,8 @@ The Nginx welcome page HTML was returned successfully.
 
 This verified that NodePort was working from inside the KIND worker node.
 
+![NodePort Access from KIND Worker Node](screenshots/06-nodeport-node-level-access.png)
+
 ### KIND Networking Observation
 
 The KIND cluster was created without `extraPortMappings`.
@@ -331,7 +343,7 @@ LoadBalancer is a Kubernetes Service type designed to integrate with an external
 
 Created a Service named `web-app-loadbalancer`.
 
-### Manifest: `loadbalancer-service.yaml`
+### Manifest: `manifests/loadbalancer-service.yaml`
 
 ```yaml
 apiVersion: v1
@@ -393,6 +405,8 @@ In AWS EKS, a LoadBalancer Service can integrate with AWS infrastructure to prov
 
 An Application Load Balancer is commonly provisioned through the AWS Load Balancer Controller using Ingress or Gateway resources.
 
+![LoadBalancer Service Configuration](screenshots/07-loadbalancer-service-created.png)
+
 ## 6. Compare Kubernetes Service Types
 
 Executed:
@@ -441,9 +455,7 @@ web-app-nodeport       NodePort       10.96.190.74   <none>        80:30080/TCP
 - Also has a ClusterIP.
 - Normally receives a NodePort allocation by default, unless NodePort allocation is disabled or handled differently by the implementation.
 
-## 7. EndpointSlices
-
-EndpointSlices provide information about the network endpoints associated with a Kubernetes Service.
+### EndpointSlices
 
 Inspected EndpointSlices using:
 
@@ -472,7 +484,9 @@ Each EndpointSlice showed port 80.
 
 The older `Endpoints` API also worked during this lab, but Kubernetes displayed a deprecation warning because EndpointSlices are the recommended API.
 
-## 8. Cleanup
+![Kubernetes Services Comparison and EndpointSlices](screenshots/08-services-comparison.png)
+
+## 7. Cleanup
 
 Deleted all Day 53 application resources:
 
@@ -504,23 +518,9 @@ No resources found in default namespace.
 
 All application resources were successfully deleted. The default Kubernetes Service remained intact.
 
-## 9. Screenshots
+![Day 53 Cleanup Verification](screenshots/09-day53-cleanup.png)
 
-| Screenshot | Description |
-|---|---|
-| 01-deployment-and-pod-ips.png | Three-replica Nginx Deployment and Pod IPs |
-| 02-clusterip-service-and-endpoints.png | ClusterIP Service and its endpoints |
-| 03-clusterip-internal-connectivity.png | Internal connectivity test using BusyBox |
-| 04-kubernetes-service-dns.png | Kubernetes Service DNS lookup |
-| 05-nodeport-service-created.png | NodePort Service configuration |
-| 06-nodeport-node-level-access.png | NodePort connectivity from KIND worker |
-| 07-loadbalancer-service-created.png | LoadBalancer Service configuration |
-| 08-services-comparison.png | Service types and EndpointSlice comparison |
-| 09-day53-cleanup.png | Final resource cleanup verification |
-
-Screenshots are available in the `screenshots/` directory.
-
-## 10. Key Learnings
+## 8. Key Learnings
 
 1. Understood the purpose of Kubernetes Services.
 2. Learned how ClusterIP provides internal Service access.
