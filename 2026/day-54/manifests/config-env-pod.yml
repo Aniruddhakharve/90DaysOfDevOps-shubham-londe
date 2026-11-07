@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: config-env-pod
+spec:
+  containers:
+    - name: busybox
+      image: busybox:latest
+      command: 
+        - sh
+        - -c
+        - "echo APP_ENV=$APP_ENV && echo APP_DEBUG=$APP_DEBUG && echo APP_PORT=$APP_PORT && sleep 3600"
+      env:
+        - name: APP_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_ENV
+        - name: APP_DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_DEBUG
+        - name: APP_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_PORT
