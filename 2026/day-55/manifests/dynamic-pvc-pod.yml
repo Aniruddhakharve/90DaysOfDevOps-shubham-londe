@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dynamic-pvc-pod
+spec:
+  containers:
+    - name: busybox
+      image: busybox:latest
+      command:
+        - sh
+        - -c
+        - "echo 'Data stored using dynamic provisioning' > /data/message.txt && echo 'Dynamic storage is working' && sleep 3600"
+      volumeMounts:
+        - name: dynamic-storage
+          mountPath: /data
+  volumes:
+    - name: dynamic-storage
+      persistentVolumeClaim:
+        claimName: dynamic-pvc
